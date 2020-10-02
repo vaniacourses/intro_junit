@@ -4,8 +4,7 @@ import org.junit.jupiter.api.*;
 
 import java.util.Date;
 
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class FaturaTest {
 
@@ -26,26 +25,26 @@ public class FaturaTest {
         fatura = new Fatura();
     }
 
-    @DisplayName("Testa os setters da classe")
+    @DisplayName("Testa os setters da classe Fatura")
     @Test
     public void testaSetter() {
         inicializaFatura();
         assertNotEquals(fatura, new Fatura());
     }
 
-    @DisplayName("Testa os getters da classe")
+    @DisplayName("Testa os getters da classe Fatura")
     @Test
     public void testaGetter() {
         inicializaFatura();
-        Assertions.assertAll("fatua",
-                () -> assertNotNull(fatura.getData()),
+        Assertions.assertAll("fatura",
+                () -> assertNotNull(fatura.getDate()),
                 () -> assertEquals(800, fatura.getValorTotal(), 0),
                 () -> assertEquals("Josicreuza", fatura.getNomeCliente()));
     }
 
     private void inicializaFatura() {
         Date date = new Date(System.currentTimeMillis());
-        fatura.setData(date);
+        fatura.setDate(date);
         fatura.setValorTotal(800);
         fatura.setNomeCliente("Josicreuza");
     }
