@@ -2,7 +2,6 @@ package boleto;
 
 import org.junit.jupiter.api.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -39,14 +38,13 @@ public class BoletoTest {
         Assertions.assertAll("boleto",
                 () -> assertEquals("bol123", boleto.getCodigo()),
                 () -> assertNotNull(boleto.getData()),
-                () -> assertEquals(300.50, boleto.getValorPago()));
+                () -> assertEquals(300.50, boleto.getValorPago(), 0));
     }
 
     private void inicializaBoleto() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date(System.currentTimeMillis());
         boleto.setCodigo("bol123");
-        boleto.setData(formatter.format(date));
+        boleto.setData(date);
         boleto.setValorPago(300.50);
     }
 
