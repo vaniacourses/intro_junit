@@ -1,12 +1,12 @@
 package pagamento;
 
-import org.junit.Assert.*
 import org.junit.jupiter.api.*;
+import pagamento.TipoPagamentoEnum.TipoPagamento;
 
 import java.util.Date;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
+
 
 public class PagamentoTest {
 
@@ -37,17 +37,18 @@ public class PagamentoTest {
     @DisplayName("Testa os getters da classe Pagamento")
     @Test
     public void testaGetters() {
-        Assertions.assertAll("boleto",
-                () -> assertEquals("bol123", pagamento.getValorPago()),
+        inicializaPagamento();
+        Assertions.assertAll("pagamento",
+                () -> assertEquals(50.30, pagamento.getValorPago(), 0),
                 () -> assertNotNull(pagamento.getDate()),
-                () -> assertEquals("BOLETO", pagamento.getTipoPagamento()));
+                () -> assertEquals(TipoPagamento.BOLETO, pagamento.getTipoPagamento()));
     }
 
     private void inicializaPagamento() {
         Date date = new Date(System.currentTimeMillis());
         pagamento.setValorPago(50.30);
         pagamento.setDate(date);
-        pagamento.setTipoPagamento("BOLETO");
+        pagamento.setTipoPagamento(TipoPagamento.BOLETO);
     }
 
 }
