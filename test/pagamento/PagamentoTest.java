@@ -46,9 +46,7 @@ public class PagamentoTest {
 
     private void inicializaPagamento() {
         Date date = new Date(System.currentTimeMillis());
-        pagamento.setValorPago(50.30);
-        pagamento.setDate(date);
-        pagamento.setTipoPagamento(TipoPagamento.BOLETO);
+        pagamento = new Pagamento(50.30, date, TipoPagamento.BOLETO);
     }
 
 }
