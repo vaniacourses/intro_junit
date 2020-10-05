@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 import pagamento.Pagamento;
 import pagamento.TipoPagamentoEnum.TipoPagamento;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,7 @@ public class ProcessadorTest {
     private static final Date DATE = new Date(System.currentTimeMillis());
     private static final double VALOR_PAGO_FATURA_PAGA = 400;
     private static final double VALOR_PAGO_FATURA_NAO_PAGA = 800;
-    private List<Boleto> listBoletos;
+    private List<Boleto> listBoletos = new ArrayList<>();
 
     @BeforeAll
     public static void printInicioTest() {
@@ -32,6 +33,7 @@ public class ProcessadorTest {
 
     @BeforeEach
     public void inicializa() {
+        listBoletos = new ArrayList<>();
         Date date = new Date(System.currentTimeMillis());
         Boleto boleto = new Boleto("bol123", date, 300);
         Boleto boleto2 = new Boleto("eto456", date, 100);
@@ -61,8 +63,8 @@ public class ProcessadorTest {
         Processador processador = inicializaProcessador(listBoletos, fatura);
         Pagamento pagamento = processador.criaPagamento();
         Assertions.assertAll("processador",
-                () -> assertEquals(VALOR_PAGO_FATURA_NAO_PAGA, pagamento.getValorPago(), 0),
-                () -> assertEquals(DATE, pagamento.getDate()),
+                () -> assertEquals(getValorTotalBoletos(), pagamento.getValorPago(), 0),
+                () -> assertNotNull(pagamento.getDate()),
                 () -> assertEquals(TipoPagamento.BOLETO, pagamento.getTipoPagamento()));
     }
 
@@ -72,6 +74,14 @@ public class ProcessadorTest {
 
     private Fatura inicializaFatura(double valorPago) {
         return new Fatura(DATE, valorPago, "Jusicreuza");
+    }
+
+    private double getValorTotalBoletos() {
+        double valorTotal = 0;
+        for (Boleto boleto : listBoletos) {
+            valorTotal = valorTotal + boleto.getValorPago();
+        }
+        return valorTotal;
     }
 
 }
