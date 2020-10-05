@@ -12,6 +12,12 @@ public class Pagamento {
     public Pagamento() {
     }
 
+    public Pagamento(double valorPago, Date date, TipoPagamento tipoPagamento) {
+        this.valorPago = valorPago;
+        this.date = date;
+        this.tipoPagamento = tipoPagamento;
+    }
+
     public TipoPagamento getTipoPagamento() {
         return tipoPagamento;
     }

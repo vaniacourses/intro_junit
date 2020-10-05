@@ -43,9 +43,7 @@ public class BoletoTest {
 
     private void inicializaBoleto() {
         Date date = new Date(System.currentTimeMillis());
-        boleto.setCodigo("bol123");
-        boleto.setData(date);
-        boleto.setValorPago(300.50);
+        boleto = new Boleto("bol123", date, 300.50);
     }
 
 }

@@ -7,7 +7,14 @@ public class Boleto {
     private String codigo;
     private Date data;
     private double valorPago;
+
     public Boleto() {
+    }
+
+    public Boleto(String codigo, Date data, double valorPago) {
+        this.codigo = codigo;
+        this.data = data;
+        this.valorPago = valorPago;
     }
 
     public String getCodigo() {
@@ -22,7 +29,7 @@ public class Boleto {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setDate(Date data) {
         this.data = data;
     }
 

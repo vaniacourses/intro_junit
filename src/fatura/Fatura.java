@@ -10,6 +10,12 @@ public class Fatura {
     public Fatura() {
     }
 
+    public Fatura(Date date, double valorTotal, String nomeCliente) {
+        this.date = date;
+        this.valorTotal = valorTotal;
+        this.nomeCliente = nomeCliente;
+    }
+
     public Date getDate() {
         return date;
     }

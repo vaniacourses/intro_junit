@@ -44,8 +44,6 @@ public class FaturaTest {
 
     private void inicializaFatura() {
         Date date = new Date(System.currentTimeMillis());
-        fatura.setDate(date);
-        fatura.setValorTotal(800);
-        fatura.setNomeCliente("Josicreuza");
+        fatura = new Fatura(date, 800, "Josicreuza");
     }
 }
