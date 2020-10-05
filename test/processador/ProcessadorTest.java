@@ -43,8 +43,7 @@ public class ProcessadorTest {
     @Test
     public void testVerificaFaturaPaga() {
         Fatura fatura = inicializaFatura(VALOR_PAGO_FATURA_PAGA);
-        Processador processador = inicializaProcessador(listBoletos, fatura);
-        assertTrue(processador.verificaFaturaPaga());
+        assertTrue(Processador.verificaFaturaPaga(listBoletos, fatura));
         assertEquals(StatusFatura.PAGA, fatura.getStatusFatura());
     }
 
@@ -52,8 +51,7 @@ public class ProcessadorTest {
     @Test
     public void testVerificaFaturaEmAberto() {
         Fatura fatura = inicializaFatura(VALOR_PAGO_FATURA_NAO_PAGA);
-        Processador processador = inicializaProcessador(listBoletos, fatura);
-        assertFalse(processador.verificaFaturaPaga());
+        assertFalse(Processador.verificaFaturaPaga(listBoletos, fatura));
         assertEquals(StatusFatura.NAO_PAGA, fatura.getStatusFatura());
     }
 
@@ -61,25 +59,12 @@ public class ProcessadorTest {
     @Test
     public void testCriaPagamento() {
         Fatura fatura = inicializaFatura(VALOR_PAGO_FATURA_NAO_PAGA);
-        Processador processador = inicializaProcessador(listBoletos, fatura);
-        processador.criaPagamentos();
+        Processador.criaPagamentos(listBoletos, fatura);
         assertEquals(listBoletos.size(), fatura.getPagamentoList().size());
-    }
-
-    private Processador inicializaProcessador(List<Boleto> listBoletos, Fatura fatura) {
-        return new Processador(listBoletos, fatura);
     }
 
     private Fatura inicializaFatura(double valorPago) {
         return new Fatura(DATE, valorPago, NOME_CLIENTE, StatusFatura.NAO_PAGA);
-    }
-
-    private double getValorTotalBoletos() {
-        double valorTotal = 0;
-        for (Boleto boleto : listBoletos) {
-            valorTotal = valorTotal + boleto.getValorPago();
-        }
-        return valorTotal;
     }
 
 }
