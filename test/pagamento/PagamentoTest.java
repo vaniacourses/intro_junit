@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
 
 public class PagamentoTest {
 
+    private static final Date DATE = new Date(System.currentTimeMillis());
+    private static final double VALOR_PAGAMENTO = 50.30;
     private Pagamento pagamento;
 
     @BeforeAll
@@ -30,24 +32,22 @@ public class PagamentoTest {
     @DisplayName("Testa os setters da classe Pagamento")
     @Test
     public void testaSetters() {
-        inicializaPagamento();
+        pagamento.setValorPago(VALOR_PAGAMENTO);
+        pagamento.setDate(DATE);
+        pagamento.setTipoPagamento(TipoPagamento.BOLETO);
         assertNotEquals(pagamento, new Pagamento());
     }
 
     @DisplayName("Testa os getters da classe Pagamento")
     @Test
     public void testaGetters() {
-        inicializaPagamento();
+        pagamento = new Pagamento(VALOR_PAGAMENTO, DATE, TipoPagamento.BOLETO);
         Assertions.assertAll("pagamento",
-                () -> assertEquals(50.30, pagamento.getValorPago(), 0),
+                () -> assertEquals(VALOR_PAGAMENTO, pagamento.getValorPago(), 0),
                 () -> assertNotNull(pagamento.getDate()),
                 () -> assertEquals(TipoPagamento.BOLETO, pagamento.getTipoPagamento()));
     }
 
-    private void inicializaPagamento() {
-        Date date = new Date(System.currentTimeMillis());
-        pagamento = new Pagamento(50.30, date, TipoPagamento.BOLETO);
-    }
 
 }
 

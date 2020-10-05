@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 
 public class BoletoTest {
 
+    private static final Date DATE = new Date(System.currentTimeMillis());
+    private static final double VALOR_PAGO = 300.50;
+    private static final String CODIGO_BOLETO = "bol123";
     private Boleto boleto;
 
     @BeforeAll
@@ -28,22 +31,19 @@ public class BoletoTest {
     @DisplayName("Testa os setters da classe Boleto")
     @Test
     public void testSettersBoleto() {
-        inicializaBoleto();
+        boleto.setCodigo(CODIGO_BOLETO);
+        boleto.setDate(DATE);
+        boleto.setValorPago(VALOR_PAGO);
         assertNotEquals(boleto, new Boleto());
     }
 
     @Test
     public void testGetters() {
-        inicializaBoleto();
+        boleto = new Boleto(CODIGO_BOLETO, DATE, VALOR_PAGO);
         Assertions.assertAll("boleto",
-                () -> assertEquals("bol123", boleto.getCodigo()),
+                () -> assertEquals(CODIGO_BOLETO, boleto.getCodigo()),
                 () -> assertNotNull(boleto.getData()),
-                () -> assertEquals(300.50, boleto.getValorPago(), 0));
-    }
-
-    private void inicializaBoleto() {
-        Date date = new Date(System.currentTimeMillis());
-        boleto = new Boleto("bol123", date, 300.50);
+                () -> assertEquals(VALOR_PAGO, boleto.getValorPago(), 0));
     }
 
 }
